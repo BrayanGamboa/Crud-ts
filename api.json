@@ -1,0 +1,22 @@
+[
+    {
+        "name_artist": "Wilmara",
+        "name_album": "Hola Mundo!",
+        "year": "2014"
+    },
+    {
+        "name_artist": "Ingrid",
+        "name_album": "Bom dia",
+        "year": "2020"
+    },
+    {
+        "name_artist": "Estefanía",
+        "name_album": "Tropical",
+        "year": "2020"
+    },
+    {
+        "name_artist": "Alejandra",
+        "name_album": "Hola a todos!",
+        "year": "2020"
+    }
+]
