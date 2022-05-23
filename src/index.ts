@@ -5,9 +5,11 @@ import { authRouter } from "./routes/login.routes";
 import { decodeToken } from "./firebase/adminTokens";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
-const port = 8080; // default port to listen
+const port = process.env.PORT; // default port to listen
 
 const swaggerOptions = {
   swaggerDefinition: {

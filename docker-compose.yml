@@ -2,11 +2,11 @@ version: '3'
 services:
 
   api:
-    co  ntainer_name: api-albunes-dock
+    container_name: api-album-dock
     restart: always
     build: .
     ports:
-      - 4000:8080
+      - 5019:8080
     links:
       - mongo
   mongo:
