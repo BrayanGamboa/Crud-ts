@@ -1,26 +1,20 @@
 import { Request, Response, NextFunction } from "express";
-import admin from "./firebase";
+import config from "./config/config";
 
-export const decodeToken = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const token = req.headers.authorization?.split(" ")[1];
-  console.log(token);
-  try {
-    if (token === undefined) {
-      return res.status(401).json({ message: "Unauthorized" });
-    } else {
-      const decodeValue = await admin.auth().verifyIdToken(token!);
-      console.log(decodeValue);
-      if (decodeValue != null || decodeValue != undefined) {
-        return next();
-      }
-      return res.json({ message: "Unauthorized" });
+export const decodeToken = async (_req: Request, res: Response, next: NextFunction) => {
+    const token = _req.headers.authorization?.split(" ")[1];
+    try {
+        if (token === undefined) {
+            return res.status(401).json({ message: "El token ha vencido, no estás autorizad@" });
+        } else {
+            const decodeValue = await config.admin.auth().verifyIdToken(token!);
+            if (decodeValue != null || decodeValue != undefined) {
+                return next();
+            }
+            return res.json({ message: "El token ha vencido, no estás autorizado" });
+        }
+    } catch (error) {
+        console.log(error);
+        return res.json({ message: "No autorizado, token incorrecto" }).status(401);
     }
-  } catch (error) {
-    console.log(error);
-    return res.json({ message: "Internal Server Error" }).status(500);
-  }
-};
+}

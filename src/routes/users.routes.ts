@@ -30,11 +30,13 @@ users.get("/:id", async (req: Request, res: Response) => {
       res.status(200).send(album);
     } else {
       res
-      .status(204)
-      .send(`"No Content" - Artist related to id not found: ${req.params.id}`);
+        .status(204)
+        .send(
+          `"No Content" - Artist related to id not found: ${req.params.id}`
+        );
     }
   } catch (error) {
-      res.status(409).send(error.message);
+    res.status(409).send(error.message);
   }
 });
 
@@ -45,7 +47,6 @@ users.post(
     try {
       const artist = req.body;
       const result = await collections.usuarios.insertOne(artist);
-
       result
         ? res
             .status(201)

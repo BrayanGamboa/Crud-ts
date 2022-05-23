@@ -1,15 +1,13 @@
 import express from "express";
 import { connectToDatabase } from "./services/database.service";
 import { users } from "./routes/users.routes";
+import { authRouter } from "./routes/login.routes";
 import { decodeToken } from "./firebase/adminTokens";
-import swaggerUi from 'swagger-ui-express';
+import swaggerUi from "swagger-ui-express";
 import swaggerJsDoc from "swagger-jsdoc";
 
 const app = express();
 const port = 8080; // default port to listen
-
-
-
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -22,7 +20,7 @@ const swaggerOptions = {
         name: "Brayan Gamboa",
         email: "bsgv2005@gmail.com",
       },
-      servers: ["http://localhost:8080","http://localhost:8020"],
+      servers: ["http://localhost:8080", "http://localhost:8020"],
       version: "1.0",
     },
   },
@@ -36,8 +34,9 @@ connectToDatabase()
     // send all calls to /games to our gamesRouter
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
-    // app.use(decodeToken);
-  
+    app.use("/auth", authRouter);
+    app.use(decodeToken);
+
     app.use("/users", users);
 
     // start the Express server

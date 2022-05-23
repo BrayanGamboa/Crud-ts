@@ -8,3 +8,4 @@ dist
 # Ignore .env file as it holds secrets
 .env
 src/firebase/service-account-key.json
+src/firebase/config/config-key.json
